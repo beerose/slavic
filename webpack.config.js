@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
-var publicPath = 'http://localhost:4001/';
+var publicPath = 'http://localhost:4000/';
 var env = process.env.MIX_ENV || 'dev';
 var prod = env === 'prod';
 

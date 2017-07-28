@@ -12,12 +12,28 @@
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
 import 'phoenix_html';
-import Phaser from 'phaser-ce';
-
-var game = new Phaser.Game();
-
+// import Phaser from 'phaser-ce';
+// 
+// var game = new Phaser.Game();
+// 
 console.log('Hello.');
 console.log('KK.');
+
+
+import { connectToSocket } from './socket';
+
+// handler for the join button
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('joinButton').addEventListener('click', () => {
+    var email = document.querySelector('#email')[0].innerHTML();
+    if (/@/.test(email)) {
+      console.log('click');
+      connectToSocket(email.trim(), document);
+    } else {
+      alert('You should enter your email to join the game');
+    }
+  });
+});
 // Import local files
 //
 // Local files can be imported directly using relative

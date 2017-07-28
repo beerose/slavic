@@ -1,1 +1,11 @@
 <div id="root">Root.</div>
+
+<div id="login">
+    <h4>Use your email to join the game</h4>
+    Email: <input id="email" type="email" required>
+    <button id="joinButton">Join</button>
+    <button id="leftButton">Leave shrine</button>
+    <br/><br/>
+    <h4>Messages</h4>
+    <div id="messages" class="messages"></div>
+</div>
