@@ -14,6 +14,7 @@ defmodule Slavic.Application do
 
       # starting agent keeping current game state 
       worker(Slavic.GameState, []),
+     # worker(Slavic.ChannelMonitor, [%{}])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

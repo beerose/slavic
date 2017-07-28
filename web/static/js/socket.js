@@ -2,7 +2,7 @@ import { Socket } from 'phoenix';
 
 let me;
 let players = {};
-const messagesContainer = document.getElementById('messages').innerHTML;
+const messagesContainer = document.getElementById('messages');
 
 // Start the connection to the socket and joins the channel
 // Does initialization and key binding
@@ -20,14 +20,23 @@ function connectToSocket(player_id, document) {
       players = initialPlayers.players;
       console.log(players);
       setupChannelMessageHandlers(channel);
+      document.getElementById('joinButton').remove();
     });
+}
+
+function leftTheSocket(player_id, document) {
+  // channel.left()
+  //  .receive('ok', initialPlayers => {
+  //    players = initialPlayers.players;
+  //    document.getElementById('leftButton').remove();
+  //  });
 }
 
 function setupChannelMessageHandlers(channel) {
   // New player joined the game
   channel.on('player:joined', ({ player: player }) => {
-    messagesContainer.append(`<br/>${player.id} joined`);
-    messagesContainer.scrollTop( messagesContainer.prop('scrollHeight'));
+    messagesContainer.innerHTML += player.id + ' joined';
+    // messagesContainer.scrollTop( messagesContainer.prop('scrollHeight'));
     players[player.id] = player;
   });
 
@@ -37,4 +46,4 @@ function setupChannelMessageHandlers(channel) {
   });
 }
 
-export { connectToSocket };
+export { connectToSocket, leftTheSocket };

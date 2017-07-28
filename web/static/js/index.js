@@ -11,28 +11,36 @@ console.log('Hello.');
 console.log('KK.');
 
 
-import { connectToSocket } from './socket';
+import { connectToSocket, leftTheSocket } from './socket';
 
 // handler for the join button
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('joinButton').addEventListener('click', () => {
-    var email = document.querySelector('#email')[0].innerHTML();
-    if (/@/.test(email)) {
-      console.log('click');
-      connectToSocket(email.trim(), document);
-    } else {
-      alert('You should enter your email to join the game');
-    }
+    var email = document.getElementById('email').value;
+    // if (/@/.test(email)) {
+    console.log(email);
+    connectToSocket(email.trim(), document);
+    // } else {
+    //  alert('You should enter your email to join the game');
+    // }
   });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('leftButton').addEventListener('click', () => {
+    var email = document.getElementById('email').value;
+    leftTheSocket(email, document);
+  });
+});
+
 // Import local files
 //
-  // socket.connect();
-  // const channel = socket.channel('shrine', {});
-  // joinChannel(channel, () => {
-  //  console.log('Joined channel.');
-  // });
-}
+// socket.connect();
+// const channel = socket.channel('shrine', {});
+// joinChannel(channel, () => {
+//  console.log('Joined channel.');
+// });
+
 
 function update() {
 

@@ -29,6 +29,10 @@ defmodule Slavic.GameState do
       Agent.get(__MODULE__, &Map.get(&1, player_id))
     end
 
+    def delete_player(player_id) do
+        Agent.update(__MODULE__, &Map.delete(&1, player_id))
+    end
+
     @doc """
       Update the player information in the map
     """

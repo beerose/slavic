@@ -9,3 +9,5 @@
     <h4>Messages</h4>
     <div id="messages" class="messages"></div>
 </div>
+
+<div id = "socket"> </div>
