@@ -16,7 +16,7 @@ defmodule SlavicWeb.Router do
   scope "/", SlavicWeb do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", GameController, :index
   end
 
   # Other scopes may use custom stacks.
