@@ -29,12 +29,9 @@
         <%= render @view_module, @view_template, assigns %>
       </main>
 
-    </div> <!-- /container -->
-    <!-- <%= if Mix.env == :dev do %> -->
-    <!--   <script src='http://localhost:4001/js/bundle.js'></script> -->
-    <!-- <% else %> -->
-
-    <script src="<%= static_path(@conn, "js/bundle.js") %>"></script>
-    <!-- <% end %> -->
+    </div>
+    <script src="js/p2.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js"></script>
+    <script src="js/bundle.js"></script>
   </body>
 </html>
