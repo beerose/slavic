@@ -2,27 +2,57 @@
 // watched paths. Those paths can be configured at
 // config.paths.watched in "brunch-config.js".
 //
-// However, those files will only be executed if
-// explicitly imported. The only exception are files
-// in vendor, which are never wrapped in imports and
-// therefore are always executed.
-
-// Import dependencies
-//
-// If you no longer want to use a dependency, remember
-// to also remove its path from "config.paths.watched".
 import 'phoenix_html';
 import Phaser from 'phaser-ce';
 
-var game = new Phaser.Game();
+import socket from './socket';
+import { joinChannel } from './common/channels';
 
-console.log('Hello.');
-console.log('KK.');
-// Import local files
+new Phaser.Game(800, 600, Phaser.CANVAS);
+// /
+// /console.log('Starting game.');
+// /const game = new Phaser.Game({
+// /  // width: 800,
+// /  // height: 600,
+// /  // renderer: Phaser.AUTO,
+// /  // antialias: false,
+// /  // parent: 'game',
+// /  // state: {
+// /  //  preload: preload,
+// /  //  create: create,
+// /  //  update: update,
+// /  //  render: render,
+// /  //  shutdown: shutdown,
+// /  // },
+// /});
+// /
+// /window.game = game;
+
+console.log('... <>');
+
+function preload() {
+
+}
+
+function create() {
+  // console.log('create game');
 //
-// Local files can be imported directly using relative
-// paths "./socket" or full ones "web/static/js/socket".
+  // socket.connect();
+  // const channel = socket.channel('shrine', {});
+  // joinChannel(channel, () => {
+  //  console.log('Joined channel.');
+  // });
+}
 
-// import socket from "./socket"
+function update() {
 
+}
+
+function render() {
+
+}
+
+function shutdown() {
+
+}
 
