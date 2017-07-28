@@ -1,0 +1,53 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "node": true,
+        "jest": true
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "extends": ["eslint:recommended", "google"],
+    "parser": "babel-eslint",
+    "rules": {
+        "switch-colon-spacing": ["error", {"after": true, "before": false}],
+        "require-jsdoc": "off",
+        "no-console":"off",
+        "prefer-const": "error",
+        "semi": "error",
+        "no-var": "off",
+        "guard-for-in": "off",
+        "no-invalid-this": "off",
+        "arrow-parens": ["error", "as-needed"],
+        "quotes": ["error", "single", {
+          "avoidEscape": true,
+          "allowTemplateLiterals": true
+        }],
+        "object-curly-spacing": ["warn", "always"],
+        "indent": ["error", 2, {
+          "outerIIFEBody": 1,
+          "FunctionDeclaration": {"parameters": "first"},
+          "FunctionExpression": {"parameters": "first"},
+          "CallExpression": {"arguments": "first"},
+          "ArrayExpression": "first",
+          "ObjectExpression": "first"
+        }],
+        "space-infix-ops": ["error", {"int32Hint": true}],
+        
+        "no-const-assign": "error",
+        "no-this-before-super": "warn",
+        "no-undef": "warn",
+        "no-unreachable": "warn",
+        "no-unused-vars": "warn",
+        "constructor-super": "warn",
+        "valid-typeof": "warn",
+        "max-len": "warn",
+        "camelcase": "warn",
+        "new-cap": "warn"
+    }
+}
