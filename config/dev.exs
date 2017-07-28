@@ -11,7 +11,10 @@ config :slavic, SlavicWeb.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
-  watchers: [npm: ["run", "watch"]]
+  watchers: [
+    npm: ["run", "watch"]
+    #{Path.expand("webpack.dev.js"), []}
+  ]
 
 # ## SSL Support
 #
@@ -34,6 +37,7 @@ config :slavic, SlavicWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
+      #nie wiem czy nie chce wyciagnac z tego cssa
       ~r{priv/gettext/.*(po)$},
       ~r{lib/slavic_web/views/.*(ex)$},
       ~r{lib/slavic_web/templates/.*(eex)$}
