@@ -10,6 +10,7 @@ defmodule SlavicWeb.Router do
   end
 
   pipeline :api do
+   
     plug :accepts, ["json"]
   end
 
