@@ -62,7 +62,6 @@ console.log('KK.');
 
 
 function update() {
-  if ()
 }
 
 function render() {

@@ -1,4 +1,4 @@
-<div id="root">Root.</div>
+<div id="game">Root.</div>
 
 <div id="login">
     <h4>Use your email to join the game</h4>
