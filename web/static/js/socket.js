@@ -1,6 +1,6 @@
 import { Socket } from 'phoenix';
 import { updatePlayersList, initNewPlayer, handlePlayerLeft } from './login';
-
+import { updateMessageBox } from './chat';
 
 let players = {};
 // Start the connection to the socket and joins the channel
@@ -9,6 +9,11 @@ let players = {};
 function bindLeftKeys(channel, document) {
   document.getElementById('leftButton').addEventListener('click', () => {
     channel.push('player:left', { });
+  });
+
+  document.getElementById('send-message').addEventListener('click', () => {
+    var message = document.getElementById('chat-textarea').value;
+    channel.push('player:send_message', { message: message });
   });
 }
 
@@ -42,6 +47,10 @@ function setupChannelMessageHandlers(channel) {
   channel.on('player:left', ({ player: players_updated }) => {
     updatePlayersList(players_updated);
     handlePlayerLeft();
+  });
+
+  channel.on('player:send_message', ( { player: { message: message, author: author } }) => {
+    updateMessageBox(message, author);
   });
 }
 

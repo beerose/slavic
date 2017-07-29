@@ -2,7 +2,6 @@
 <div id="currentPlayer"></div>
 
 <div id="userPanel">
-    <h4>Use your email to join the game</h4>
     <div id="login" style="display: block;">
         Email: <input id="email" type="email" required>
         <button class="button" id="joinButton" style="display: inline;">Join</button>
@@ -15,5 +14,10 @@
     </div>
 </div>
 
+<div id="chat"> 
+    <div id="chat-box"></div>
+    <textarea rows="4" cols="50" id="chat-textarea">Type your message here. </textarea>
+    <button id="send-message">Ok</button>
+</div>
 <div id = "socket"> </div>
 

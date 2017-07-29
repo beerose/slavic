@@ -7,7 +7,6 @@ const login = document.getElementById('login');
 const leftButton = document.getElementById('leftButton');
 const joinButton = document.getElementById('joinButton');
 
-
 // handler for the join button
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('joinButton').addEventListener('click', () => {
@@ -23,7 +22,7 @@ function updatePlayersList(players) {
 }
 
 function initNewPlayer(players, currentPlayer) {
-  currentPlayerDiv.innerHTML += 'Hello ' + currentPlayer + '!';
+  // currentPlayerDiv.innerHTML += 'Hello ' + currentPlayer + '!';
   console.log('cokolwiek');
   login.style.display = 'none';
   leftButton.style.display = 'inline';
@@ -36,6 +35,7 @@ function handlePlayerLeft() {
   leftButton.style.display = 'none';
   playersDiv.style.display = 'none';
 }
+
 
 export { updatePlayersList, initNewPlayer, handlePlayerLeft }
 ;

@@ -31,7 +31,7 @@ defmodule SlavicWeb.GameChannel do
 
   def handle_info({:after_join, _message}, socket) do
     player_id = socket.assigns.player_id
-    player = %{id: player_id}
+    player = %{id: player_id, info: %{health: 100, position: %{x: 0, y: 0}}}
     player = GameState.put_player(player)
     # TO DO
     broadcast! socket, "player:joined", %{player: player}
@@ -48,5 +48,12 @@ defmodule SlavicWeb.GameChannel do
     broadcast! socket, "player:left", %{player: GameState.players()}
     IO.inspect(GameState.players())
     {:noreply, socket}
-end
+  end
+
+  def handle_in("player:send_message", %{"message" => message}, socket) do
+    player_id = socket.assigns.player_id
+
+    broadcast! socket, "player:send_message", %{player: %{message: message, author: player_id}}
+    {:noreply, socket}
+  end
 end
