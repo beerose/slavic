@@ -41,18 +41,10 @@ function create() {
   spawnDraggableSword(resources, app, tink);
   update();
 }
-console.log('Hello.');
-console.log('KK.');
 
-// Import local files
-//
-// socket.connect();
-// const channel = socket.channel('shrine', {});
-// joinChannel(channel, () => {
-//  console.log('Joined channel.');
-// });
 
 let time = performance.now();
+
 function update() {
   const now = performance.now();
   const dt = now - time;
