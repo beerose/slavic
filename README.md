@@ -1,16 +1,26 @@
 # Slavic
 
-## How to start our awesome game:
+## How to start:
 
-  * have elixir
-  * have nodejs
-  * have npm
-  * go to slavic dir
+  * Have elixir
+  * Have nodejs
+  * Have npm
+  * Go to slavic dir:
+  
+  ```
+  cd slavic
+  ```
+  
   * type: mix local.hex in case you don't have hex installed 
-  * type: npm i
-  * type: mix deps.get
-  * finally type: npm start
-  * go to http://localhost:4000 and play in our awesome game
+  * type or paste:
+  
+  ```
+  npm install
+  mix deps.get
+  npm start
+  ```
+  
+  * Go to http://localhost:4000 and play our awesome game.
 
   it should work. if not -- install whatever you need 
   or configure files in config dir however you need
@@ -28,3 +38,4 @@
 
 
 
+  
