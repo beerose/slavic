@@ -12,22 +12,34 @@ import 'login';
 import { joinChannel } from './common/channels';
 import { sheet, spawnDraggableSword } from './common/sprites';
 import { spawnHero } from './common/players';
+import load from './common/loader';
 
 const app = new pixi.Application();
 const tink = new Tink(pixi, app.view);
 
 document.querySelector('#game').appendChild(app.view);
 
+let resources;
 //
 
 function preload() {
-  sheet.load();
+  load({
+    sword: 'images/sword.png',
+    sheet: 'images/sheet.png',
+  }, (loader, res) => {
+    console.log('Resources loaded.');
+    window.resources = res; // DDEBUG:
+    resources = res;
+    sheet.load(res);
+    create();
+  });
 }
 
 function create() {
-  for (let i = 0; i < 32; ++i) {
-    spawnHero(app, tink, i, ((i / 6)|0) * 48 + 32, (i % 6) * 48 + 32);
-  }
+  heroSelection.show();
+
+  spawnDraggableSword(resources, app, tink);
+  update();
 }
 
 
@@ -54,5 +66,24 @@ function shutdown() {
 }
 
 preload();
-create();
-update();
+
+
+var heroSelection = {
+  show() {
+    const selection = new pixi.Container();
+    heroSelection.container = selection;
+    const coolScreenConstant = 12;
+    selection.position.x = app.view.width / coolScreenConstant;
+    selection.position.y = app.view.height / coolScreenConstant;
+    app.stage.addChild(selection);
+
+    for (let i = 0; i < 32; ++i) {
+      spawnHero(app, tink, i,
+                (((i / 6)|0) + 1) * 70, (i % 6 + 1) * 70,
+                selection);
+    }
+  },
+  hide() {
+    heroSelection.container.destroy();
+  },
+};
