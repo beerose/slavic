@@ -4,12 +4,15 @@
 //
 import 'phoenix_html';
 import * as pixi from 'pixi.js';
+pixi.settings.SCALE_MODE = pixi.SCALE_MODES.NEAREST;
+import Tink from 'vendor/tink';
 
 import socket from './socket';
 import 'login';
 import { joinChannel } from './common/channels';
 
 const app = new pixi.Application();
+const tink = new Tink(pixi, app.view);
 
 document.querySelector('#game').appendChild(app.view);
 
@@ -21,33 +24,32 @@ function preload() {
 
 function create() {
   pixi.loader
-    .add('sword', 'assets/images/sword.png')
+    .add('sword', 'images/sword.png')
     .load(function(loader, resources) {
-      var bunny = new pixi.Sprite(resources.sword.texture);
-
+      var sword = new pixi.Sprite(resources.sword.texture);
+      sword.scale.x = 4;
+      sword.scale.y = 4;
       // Setup the position of the bunny
-      bunny.x = app.renderer.width / 2;
-      bunny.y = app.renderer.height / 2;
+      sword.x = app.renderer.width / 2;
+      sword.y = app.renderer.height / 2;
 
-      // Rotate around the center
-      bunny.anchor.x = 0.5;
-      bunny.anchor.y = 0.5;
+      sword.anchor.x = 0.5;
+      sword.anchor.y = 0.5;
 
-      // Add the bunny to the scene we are building.
-      app.stage.addChild(bunny);
+      app.stage.addChild(sword);
 
-      // Listen for frame updates
       app.ticker.add(function() {
-      // each frame we spin the bunny around a bit
-        bunny.rotation += 0.01;
+        sword.rotation += 0.01;
       });
+
+      tink.makeDraggable(sword);
     });
 
-  socket.connect();
-  const channel = socket.channel('shrine', {});
-  joinChannel(channel, () => {
-    console.log('Joined channel.');
-  });
+  // socket.connect();
+  // const channel = socket.channel('shrine', {});
+  // joinChannel(channel, () => {
+  //  console.log('Joined channel.');
+  // });
 }
 console.log('Hello.');
 console.log('KK.');
@@ -62,6 +64,9 @@ console.log('KK.');
 
 
 function update() {
+  tink.update();
+  requestAnimationFrame(update);
+  console.log('..');
 }
 
 function render() {
@@ -74,3 +79,4 @@ function shutdown() {
 
 preload();
 create();
+update();
