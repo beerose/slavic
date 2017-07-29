@@ -12,7 +12,7 @@ function bindLeftKeys(channel, document) {
   document.getElementById('leftButton').addEventListener('click', () => {
     console.log('button');
     console.log(channel);
-    channel.push('player:left', { player: 'Olenka' });
+    channel.push('player:left', { });
   });
 }
 
@@ -43,14 +43,15 @@ function setupChannelMessageHandlers(channel) {
     players[player.id] = player;
     document.getElementById('active_players').style.display = 'inline';
     messagesContainer.innerHTML = Object.keys(players).join('<br />');
-    console.log(player);
-    // messagesContainer.scrollTop( messagesContainer.prop('scrollHeight'));
   });
-  channel.on('player:left', ({ player: player }) => {
-    console.log(player, 'left');
+  channel.on('player:left', ({ player: players_updated }) => {
+    console.log('cokolwiek');
+    console.log(players_updated, 'left1');
+    document.getElementById('messages').style.display = 'none';
+    console.log(document.getElementById('messages'));
+    // messagesContainer.innerHTML = Object.keys(players_updated).join('<br />');
   });
-
-  // Player changed position in board
 }
+
 
 export { connectToSocket };

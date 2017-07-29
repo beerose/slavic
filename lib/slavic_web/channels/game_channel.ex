@@ -38,15 +38,15 @@ defmodule SlavicWeb.GameChannel do
     {:noreply, socket}
   end
 
-  def handle_in("player:left", %{player: player}, socket) do
-    IO.inspect(player <> "arrived")
+  def handle_in("player:left", %{ }, socket) do
+   # IO.inspect(player <> "arrived")
     player_id = socket.assigns.player_id
     IO.inspect("######################################y##########")
-    IO.inspect(player_id)
     IO.inspect("################################################")
 
     GameState.delete_player(player_id)
-    broadcast! socket, "player:left", %{player: player_id}
+    broadcast! socket, "player:left", %{player: GameState.players()}
+    IO.inspect(GameState.players())
     {:noreply, socket}
 end
 end
