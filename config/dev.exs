@@ -8,6 +8,7 @@ config :slavic, SlavicWeb.Endpoint,
   code_reloader: true,
   check_origin: false,
   watchers: [
+    npm: ["run", "watch"]
     #{Path.expand("webpack.dev.js"), []}
   ]
 
