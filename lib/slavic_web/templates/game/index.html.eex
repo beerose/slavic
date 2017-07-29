@@ -5,9 +5,9 @@
     <h4>Use your email to join the game</h4>
     <div id="login" style="display: block;">
         Email: <input id="email" type="email" required>
-        <button id="joinButton" style="display: inline;">Join</button>
+        <button class="button" id="joinButton" style="display: inline;">Join</button>
     </div>
-    <button id="leftButton" style="display: none;">Leave shrine</button>
+    <button class="button" id="leftButton" style="display: none;">Leave shrine</button>
     <br/><br/>
     <div id="players">
         <h4 id="active_players" style="display: none;">Active players:</h4>
@@ -16,3 +16,4 @@
 </div>
 
 <div id = "socket"> </div>
+
