@@ -6,7 +6,6 @@ const currentPlayerDiv = document.getElementById('currentPlayer');
 const login = document.getElementById('login');
 const leftButton = document.getElementById('leftButton');
 const joinButton = document.getElementById('joinButton');
-
 // const game = document.getElementById('game');
 const chatEnabledInfo = document.getElementById('enable-chat');
 
@@ -51,9 +50,9 @@ document.addEventListener('keyup', function(event) {
   if (!userCreated
       && (event.keyCode === 13)) {
     event.preventDefault();
+    executeLogin();
+    userCreated = true;
   }
-  userCreated = true;
-  executeLogin();
   // case 37: 
   // case 38:
   // case 39:
