@@ -1,21 +1,42 @@
 import { Socket } from 'phoenix';
 import { updatePlayersList, initNewPlayer, handlePlayerLeft } from './login';
-import { updateMessageBox } from './chat';
+import { updateMessageBox, pushMessage } from './chat';
+import { changePosition } from './player';
+
 
 let players = {};
 // Start the connection to the socket and joins the channel
 // Does initialization and key binding
 
 function bindLeftKeys(channel, document) {
+  var chatOpen = false;
+
   document.getElementById('leftButton').addEventListener('click', () => {
     channel.push('player:left', { });
   });
 
   document.getElementById('send-message').addEventListener('click', () => {
-    var message = document.getElementById('chat-textarea').value;
-    channel.push('player:send_message', { message: message });
+    pushMessage(channel);
+  });
+
+  document.addEventListener('keyup', function(event) {
+    event.preventDefault();
+    switch (event.keyCode) {
+    case 13:
+      if (chatOpen) {
+        pushMessage(channel);
+      } else {
+        document.getElementById('chat').classList.remove('hidden');
+        chatOpen = true;
+      }
+    // case 37: 
+    // case 38:
+    // case 39:
+    // case 40:
+    }
   });
 }
+
 
 function connectToSocket(player, document) {
   // connects to the socket endpoint
@@ -40,6 +61,7 @@ function connectToSocket(player, document) {
 function setupChannelMessageHandlers(channel) {
   // New player joined the game
   channel.on('player:joined', ({ player: player }) => {
+    console.log(player);
     players[player.id] = player;
     updatePlayersList(players);
   });
