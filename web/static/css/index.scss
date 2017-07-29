@@ -8,6 +8,17 @@ body {
   background: #333;
 }
 
+main {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#game {
+  padding: 5px;
+}
 #currentPlayer {
 
 }
@@ -60,3 +71,4 @@ body {
 #game {
   position: relative;
 }
+
