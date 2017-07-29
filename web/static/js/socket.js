@@ -1,6 +1,6 @@
 import { Socket } from 'phoenix';
 import { updatePlayersList, initNewPlayer, handlePlayerLeft } from './login';
-import { updateMessageBox, pushMessage } from './chat';
+import { updateMessageBox, pushMessage, handleNewMessaged } from './chat';
 import { changePosition } from './player';
 
 
@@ -23,12 +23,8 @@ function bindLeftKeys(channel, document) {
     event.preventDefault();
     switch (event.keyCode) {
     case 13:
-      if (chatOpen) {
-        pushMessage(channel);
-      } else {
-        document.getElementById('chat').classList.remove('hidden');
-        chatOpen = true;
-      }
+      chatOpen = handleNewMessaged(channel, chatOpen);
+
     // case 37: 
     // case 38:
     // case 39:

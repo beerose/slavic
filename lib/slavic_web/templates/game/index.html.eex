@@ -1,5 +1,15 @@
+<div id="game" class="hidden">
     <h4 id="enable-chat" class="hidden"> Press enter to enable chat </h4>
-<div id="game" class="hidden"></div>
+        <div id="chat"> 
+        <div id="chat-box"></div>
+        <div id="chat-text" class="hidden">
+            <textarea rows="1" cols="50" id="chat-textarea" 
+            placeholder="Press OK or click enter to send a message."> </textarea>
+            
+            <button id="send-message">Ok</button>
+        </div>
+    </div>
+</div>
 <div id="currentPlayer"></div>
 
 <div id="userPanel">
@@ -14,10 +24,6 @@
         <div id="messages" class="messages"></div>
     </div>
 </div>
-<div id="chat" class="hidden"> 
-    <div id="chat-box"></div>
-    <textarea rows="4" cols="50" id="chat-textarea">Type your message here. </textarea>
-    <button id="send-message">Ok</button>
-</div>
+
 <div id="socket"> </div>
 
