@@ -44,6 +44,17 @@ defmodule Slavic.GameState do
       player
     end
 
+    def player_position(player) do
+      Agent.get(__MODULE__, 
+          &Map.get(&1, player.info, player))
+      |> Map.get(:position)
+    end
+
+    def player_info(player) do
+      Agent.get(__MODULE__,
+        &Map.get(&1, player.info, player))
+    end
+
     @doc """
      Get all the players in the map
     """

@@ -1,3 +1,7 @@
+.hidden {
+  display: none;
+}
+
 body {
   font-family: monospace;
   color: white;
@@ -12,6 +16,58 @@ main {
   flex-direction: column;
 }
 
+#currentPlayer {
+
+}
+
+#login {
+
+}
+
+#players {
+
+}
+
+#active_players{
+
+}
+
+#messages {
+
+}
+
+#chat-box {
+  opacity: 0.7;
+}
+
+#chat-textarea {
+  opacity: 0.3;
+}
+
+#enable-chat {
+  padding-left: 50%;
+  margin: 0%;
+  opacity: 0.5;
+  position: absolute;
+  width: 50%;
+}
+
+#chat {
+  padding-bottom: 90%;
+  padding-left: 80%;
+  opacity: 0.7;
+  width:30%;
+  position: absolute;
+
+}
+#chat-box{
+  max-height: 300px;
+  overflow-y: auto    <h4 id="enable-chat" class="hidden"> Press enter to enable chat </h4>
+;
+}
+
 #game {
+  position: relative;
   padding: 5px;
 }
+>>>>>>> master
