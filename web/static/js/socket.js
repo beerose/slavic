@@ -1,49 +1,49 @@
 import { Socket } from 'phoenix';
+import { updatePlayersList, initNewPlayer, handlePlayerLeft } from './login';
 
-let me;
+
 let players = {};
-const messagesContainer = document.getElementById('messages');
-
 // Start the connection to the socket and joins the channel
 // Does initialization and key binding
-function connectToSocket(player_id, document) {
+
+function bindLeftKeys(channel, document) {
+  document.getElementById('leftButton').addEventListener('click', () => {
+    channel.push('player:left', { });
+  });
+}
+
+function connectToSocket(player, document) {
   // connects to the socket endpoint
-  const socket = new Socket('/socket', { params: { player_id: player_id } });
+  const socket = new Socket('/socket', { params: { player_id: player } });
   socket.connect();
   const channel = socket.channel('lobby:init', {});
-  me = player_id;
+  var currentPlayer = player;
 
   // joins the channel
   channel.join()
-    .receive('ok', initialPlayers => { // on joining channel, we receive the current players list
-      console.log('Joined to channel');
+  // on joining channel, we receive the current players list
+    .receive('ok', initialPlayers => {
       players = initialPlayers.players;
-      console.log(players);
+      initNewPlayer(players, currentPlayer);
+      console.log('Joined to channel');
+      bindLeftKeys(channel, document);
       setupChannelMessageHandlers(channel);
-      document.getElementById('joinButton').remove();
     });
 }
 
-function leftTheSocket(player_id, document) {
-  // channel.left()
-  //  .receive('ok', initialPlayers => {
-  //    players = initialPlayers.players;
-  //    document.getElementById('leftButton').remove();
-  //  });
-}
 
 function setupChannelMessageHandlers(channel) {
   // New player joined the game
   channel.on('player:joined', ({ player: player }) => {
-    messagesContainer.innerHTML += player.id + ' joined';
-    // messagesContainer.scrollTop( messagesContainer.prop('scrollHeight'));
     players[player.id] = player;
+    updatePlayersList(players);
   });
-
-  // Player changed position in board
-  channel.on('player:position', ({ player: player }) => {
-    players[player.id] = player;
+  // Player left the game
+  channel.on('player:left', ({ player: players_updated }) => {
+    updatePlayersList(players_updated);
+    handlePlayerLeft();
   });
 }
 
-export { connectToSocket, leftTheSocket };
+
+export { connectToSocket };

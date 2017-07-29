@@ -29,18 +29,10 @@ function create() {
     spawnHero(app, tink, i, ((i / 6)|0) * 48 + 32, (i % 6) * 48 + 32);
   }
 }
-console.log('Hello.');
-console.log('KK.');
 
-// Import local files
-//
-// socket.connect();
-// const channel = socket.channel('shrine', {});
-// joinChannel(channel, () => {
-//  console.log('Joined channel.');
-// });
 
 let time = performance.now();
+
 function update() {
   const now = performance.now();
   const dt = now - time;
