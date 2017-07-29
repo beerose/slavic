@@ -39,6 +39,7 @@ module.exports = {
         loader: 'babel-loader',
         query: {
           presets: ['stage-2', 'es2015'],
+          plugins: ['babel-plugin-transform-object-rest-spread'],
         },
       },
       {

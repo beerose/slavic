@@ -1,16 +1,16 @@
 <div id="game" class="-hidden"></div>
 <h4 id="enable-chat" class="hidden"> Press enter to enable chat </h4>
-<div id="chat"> 
- <div id="chat-input" class="hidden">
+<article id="chat"> 
+  <ul></ul>
+  <section class="hidden">
     <textarea rows="1" cols="50" 
               placeholder="Press OK or click enter to send a message.">
     </textarea>
-      
-    <button id="send-message">Ok</button>
-  </div> 
-</div>
+    <button>Ok</button>
+  </section> 
+</article>
 
-<div id="currentPlayer"></div>
+<em id="currentPlayer"></em>
 
 <section id="userPanel">
   <h4>Enter your name to join the game!</h4>
@@ -18,11 +18,13 @@
     <input id="username" type="text" required>
     <button id="joinButton">Join</button> <!-- should be clicked on enter -->
   </div>
-  <button class="button hidden" id="leftButton">Leave</button>
-  <br/><br/>
-  <div id="players">
-    <h4 class="hidden">Active players:</h4>
-    <ul></ul>
+  <div class="hidden quickfix">
+    <button class="button hidden" id="leftButton">Leave</button>
+    <br/><br/>
+    <div id="players">
+      <h4 class="hidden">Active players:</h4>
+      <ul></ul>
+    </div>
   </div>
 </section>
 

@@ -1,14 +1,33 @@
 import { Socket } from 'phoenix';
 import { updatePlayersList, initNewPlayer, handlePlayerLeft } from './login';
-
+import * as chat from './chat';
 
 let players = {};
 // Start the connection to the socket and joins the channel
 // Does initialization and key binding
 
-function bindLeftKeys(channel, document) {
+function addChannelListeners(channel, document) {
+  var chatOpen = false;
   document.getElementById('leftButton').addEventListener('click', () => {
     channel.push('player:left', { });
+  });
+
+  chat.sendButton.addEventListener('click', () => {
+    console.log('cht', chat);
+    chat.pushMessage(channel);
+  });
+
+  document.addEventListener('keyup', function(event) {
+    event.preventDefault(); // ???
+    switch (event.keyCode) {
+    case 13: // [ENTER]
+      chatOpen = chat.handleNewMessaged(channel, chatOpen);
+
+    // case 37: 
+    // case 38:
+    // case 39:
+    // case 40:
+    }
   });
 }
 
@@ -26,7 +45,7 @@ function connectToSocket(player, document) {
       players = initialPlayers.players;
       initNewPlayer(players, currentPlayer);
       console.log('Joined to channel');
-      bindLeftKeys(channel, document);
+      addChannelListeners(channel, document);
       setupChannelMessageHandlers(channel);
     });
 }
@@ -43,7 +62,11 @@ function setupChannelMessageHandlers(channel) {
     updatePlayersList(players_updated);
     handlePlayerLeft();
   });
-}
 
+  channel.on('player:send_message', (
+    { player: { message: message, author: author } }) => {
+    chat.updateMessageBox(message, author);
+  });
+}
 
 export { connectToSocket };

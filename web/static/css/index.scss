@@ -1,7 +1,27 @@
+$purple: #69ABCC;
+$yellow: #F7DF67;
+$green: #5E7B37;
+
 body {
-  font-family: monospace;
   color: white;
-  background: #333;
+  background: #000;
+}
+
+@media only screen and (max-width: 600px) {
+  :root {
+    --font-size: 12px;
+  }
+}
+@media only screen and (min-width: 601px) {
+  :root {
+    --font-size: 16px;
+  }
+}
+
+
+input, body, button, textarea {
+  font-family: Monaco, Inconsolata, Consolas, monospace;
+  font-size: var(--font-size);
 }
 
 main {
@@ -12,16 +32,45 @@ main {
   flex-direction: column;
 }
 
-#game {
-  padding: 5px;
-}
-
 .hidden {
   display: none;
 }
 
-#chat-box {
-  //opacity: 0.7;
-  //max-height: 300px;
-  //overflow-y: auto;
+h4 {
+  margin-top: 2px;
+  margin-bottom: 5px;
+}
+
+#chat {
+  position: fixed;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+
+  >section {
+    button {
+      pointer-events: initial !important;
+    }
+  }
+
+  >ul {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+    margin-left: 4px;
+    margin-top: 4px;
+    >li {
+      padding: 2px;
+      display: block;
+      p {
+        display: inline;
+        color: $yellow;
+      } 
+      strong {
+        font-weight: normal;
+        color: $purple;
+        display: inline;
+      }
+    }
+  }
 }

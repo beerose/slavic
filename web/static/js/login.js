@@ -32,6 +32,8 @@ function initNewPlayer(players, currentPlayer) {
   login.classList.add('hidden');
   leftButton.classList.remove('hidden');
   chatEnabledInfo.classList.remove('hidden');
+  document.querySelector('section#userPanel')
+    .classList.add('hidden');
 }
 
 function handlePlayerLeft() {
