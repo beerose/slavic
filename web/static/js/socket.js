@@ -18,9 +18,9 @@ function addChannelListeners(channel, document) {
   });
 
   document.addEventListener('keyup', function(event) {
-    event.preventDefault(); // ???
     switch (event.keyCode) {
     case 13: // [ENTER]
+      event.preventDefault(); // ???
       chatOpen = chat.handleNewMessaged(channel, chatOpen);
 
     // case 37: 

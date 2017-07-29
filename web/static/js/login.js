@@ -10,13 +10,16 @@ const joinButton = document.getElementById('joinButton');
 // const game = document.getElementById('game');
 const chatEnabledInfo = document.getElementById('enable-chat');
 
+let userCreated = false;
+
+export function executeLogin() {
+  var username = document.getElementById('username').value;
+  connectToSocket(username.trim(), document);
+}
 
 // handler for the join button
 document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('joinButton').addEventListener('click', () => {
-    var username = document.getElementById('username').value;
-    connectToSocket(username.trim(), document);
-  });
+  document.getElementById('joinButton').addEventListener('click', executeLogin);
 });
 
 
@@ -43,5 +46,18 @@ function handlePlayerLeft() {
   playersDiv.classList.add('hidden');
   login.classList.remove('hidden');
 }
+
+document.addEventListener('keyup', function(event) {
+  if (!userCreated
+      && (event.keyCode === 13)) {
+    event.preventDefault();
+  }
+  userCreated = true;
+  executeLogin();
+  // case 37: 
+  // case 38:
+  // case 39:
+  // case 40:
+});
 
 export { updatePlayersList, initNewPlayer, handlePlayerLeft };

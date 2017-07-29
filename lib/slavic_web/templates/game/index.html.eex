@@ -15,7 +15,7 @@
 <section id="userPanel">
   <h4>Enter your name to join the game!</h4>
   <div id="login">
-    <input id="username" type="text" required>
+    <input id="username" type="text" required autofocus>
     <button id="joinButton">Join</button> <!-- should be clicked on enter -->
   </div>
   <div class="hidden quickfix">
@@ -28,4 +28,4 @@
   </div>
 </section>
 
-<div id="socket"> </div>
+<div id="socket"></div>
