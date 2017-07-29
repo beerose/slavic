@@ -4,6 +4,8 @@
 /deps
 /*.ez
 /node_modules
+.elixir_ls
+.vscode
 
 # Generated on crash by the VM
 erl_crash.dump
