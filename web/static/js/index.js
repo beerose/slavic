@@ -6,6 +6,7 @@ import 'phoenix_html';
 import * as pixi from 'pixi.js';
 
 import socket from './socket';
+import 'login';
 import { joinChannel } from './common/channels';
 
 const app = new pixi.Application();
@@ -20,10 +21,9 @@ function preload() {
 
 function create() {
   pixi.loader
-    .add('bunny', 'assets/phoenix4.png')
+    .add('sword', 'assets/images/sword.png')
     .load(function(loader, resources) {
-    // This creates a texture from a 'bunny.png' image.
-      var bunny = new pixi.Sprite(resources.bunny.texture);
+      var bunny = new pixi.Sprite(resources.sword.texture);
 
       // Setup the position of the bunny
       bunny.x = app.renderer.width / 2;
@@ -49,9 +49,20 @@ function create() {
     console.log('Joined channel.');
   });
 }
+console.log('Hello.');
+console.log('KK.');
+
+// Import local files
+//
+// socket.connect();
+// const channel = socket.channel('shrine', {});
+// joinChannel(channel, () => {
+//  console.log('Joined channel.');
+// });
+
 
 function update() {
-
+  if ()
 }
 
 function render() {

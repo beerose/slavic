@@ -1,0 +1,27 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'run', 'watch' ]
+2 info using npm@3.10.10
+3 info using node@v6.11.0
+4 verbose run-script [ 'prewatch', 'watch', 'postwatch' ]
+5 info lifecycle slavic@0.0.1~prewatch: slavic@0.0.1
+6 silly lifecycle slavic@0.0.1~prewatch: no script for prewatch, continuing
+7 info lifecycle slavic@0.0.1~watch: slavic@0.0.1
+8 verbose lifecycle slavic@0.0.1~watch: unsafe-perm in lifecycle true
+9 verbose lifecycle slavic@0.0.1~watch: PATH: /usr/lib/node_modules/npm/bin/node-gyp-bin:/home/aleksandra/slavic/node_modules/.bin:/usr/lib64/erlang/erts-8.3.5.1/bin:/usr/lib64/erlang/bin:/usr/lib/node_modules/npm/bin/node-gyp-bin:/home/aleksandra/slavic/node_modules/.bin:/home/aleksandra/workspace/elixir/bin:/home/aleksandra/workspace/elixir/bin:/home/aleksandra/workspace/elixir/bin:/usr/lib64/qt-3.3/bin:/usr/lib64/ccache:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/home/aleksandra/.local/bin:/home/aleksandra/bin
+10 verbose lifecycle slavic@0.0.1~watch: CWD: /home/aleksandra/slavic
+11 silly lifecycle slavic@0.0.1~watch: Args: [ '-c', 'webpack --watch-stdin --progress --color' ]
+12 verbose stack Error: write EPIPE
+12 verbose stack     at exports._errnoException (util.js:1018:11)
+12 verbose stack     at WriteWrap.afterWrite (net.js:800:14)
+13 verbose cwd /home/aleksandra/slavic
+14 error Linux 4.11.8-300.fc26.x86_64
+15 error argv "/usr/bin/node" "/usr/bin/npm" "run" "watch"
+16 error node v6.11.0
+17 error npm  v3.10.10
+18 error code EPIPE
+19 error errno EPIPE
+20 error syscall write
+21 error write EPIPE
+22 error If you need help, you may report this error at:
+22 error     <https://github.com/npm/npm/issues>
+23 verbose exit [ 1, true ]

@@ -11,7 +11,10 @@ defmodule Slavic.Application do
       # Start the endpoint when the application starts
       supervisor(SlavicWeb.Endpoint, []),
       # Start your own worker by calling: Slavic.Worker.start_link(arg1, arg2, arg3)
-      # worker(Slavic.Worker, [arg1, arg2, arg3]),
+
+      # starting agent keeping current game state 
+      worker(Slavic.GameState, []),
+     # worker(Slavic.ChannelMonitor, [%{}])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

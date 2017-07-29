@@ -2,7 +2,7 @@ defmodule SlavicWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  channel "room:*", SlavicWeb.RoomChannel
+  channel "lobby:*", SlavicWeb.GameChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
@@ -19,7 +19,8 @@ defmodule SlavicWeb.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(_params, socket) do
+  def connect(%{"player_id" => email, "vsn" => vsn}, socket) do
+    socket = assign(socket, :player_id, email)
     {:ok, socket}
   end
 
