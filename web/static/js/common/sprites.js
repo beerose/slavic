@@ -2,8 +2,8 @@ import * as pixi from 'pixi.js';
 
 export function spawnDraggableSword(resources, app, tink) {
   var sword = new pixi.Sprite(resources.sword.texture);
-  sword.scale.x = 4;
-  sword.scale.y = 4;
+  sword.scale.x = 2;
+  sword.scale.y = 2;
   sword.x = app.renderer.width / 2;
   sword.y = app.renderer.height / 2;
 

@@ -8,8 +8,8 @@ export function spawnHero(
   const hero = new pixi.Sprite(
     sheet.characters[heroKind]
   );
-  hero.scale.x = 4;
-  hero.scale.y = 4;
+  hero.scale.x = 2;
+  hero.scale.y = 2;
   hero.x = x || app.renderer.width / 2;
   hero.y = y || app.renderer.height / 2;
 
