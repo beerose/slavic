@@ -1,18 +1,29 @@
-<div id="game"></div>
-<div id="currentPlayer"></div>
-
-<div id="userPanel">
-    <h4>Use your email to join the game</h4>
-    <div id="login" style="display: block;">
-        Email: <input id="email" type="email" required>
-        <button id="joinButton" style="display: inline;">Join</button>
-    </div>
-    <button id="leftButton" style="display: none;">Leave shrine</button>
-    <br/><br/>
-    <div id="players">
-        <h4 id="active_players" style="display: none;">Active players:</h4>
-        <div id="messages" class="messages"></div>
-    </div>
+<div id="game" class="-hidden"></div>
+<h4 id="enable-chat" class="hidden"> Press enter to enable chat </h4>
+<div id="chat"> 
+ <div id="chat-input" class="hidden">
+    <textarea rows="1" cols="50" 
+              placeholder="Press OK or click enter to send a message.">
+    </textarea>
+      
+    <button id="send-message">Ok</button>
+  </div> 
 </div>
 
-<div id = "socket"> </div>
+<div id="currentPlayer"></div>
+
+<section id="userPanel">
+  <h4>Enter your name to join the game!</h4>
+  <div id="login">
+    <input id="username" type="text" required>
+    <button id="joinButton">Join</button> <!-- should be clicked on enter -->
+  </div>
+  <button class="button hidden" id="leftButton">Leave</button>
+  <br/><br/>
+  <div id="players">
+    <h4 class="hidden">Active players:</h4>
+    <ul></ul>
+  </div>
+</section>
+
+<div id="socket"> </div>

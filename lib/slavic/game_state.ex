@@ -5,6 +5,17 @@ defmodule Slavic.GameState do
       The first method is required for the supervisor tree to automatically 
       create an agent when the application starts up. 
     """
+
+    def player_position(player) do
+      Agent.get(__MODULE__, 
+          &Map.get(&1, player.info, player))
+      |> Map.get(:position)
+    end
+
+    def player_info(player) do
+      Agent.get(__MODULE__,
+        &Map.get(&1, player.info, player))
+    end
   
     @doc """
       Used by the supervisor to start the Agent that will keep the game state persistent.
