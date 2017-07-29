@@ -30,7 +30,10 @@ defmodule Slavic.GameState do
     end
 
     def delete_player(player_id) do
-        Agent.update(__MODULE__, &Map.delete(&1, player_id))
+      IO.inspect("######################################")
+      IO.inspect("######################################")
+
+      Agent.update(__MODULE__, &Map.delete(&1, player_id))
     end
 
     @doc """

@@ -11,7 +11,7 @@ console.log('Hello.');
 console.log('KK.');
 
 
-import { connectToSocket, leftTheSocket } from './socket';
+import { connectToSocket } from './socket';
 
 // handler for the join button
 document.addEventListener('DOMContentLoaded', function() {
@@ -26,12 +26,12 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('leftButton').addEventListener('click', () => {
-    var email = document.getElementById('email').value;
-    leftTheSocket(email, document);
-  });
-});
+// document.addEventListener('DOMContentLoaded', function() {
+//  document.getElementById('leftButton').addEventListener('click', () => {
+//    var email = document.getElementById('email').value;
+//    leftTheSocket(email, document);
+//  });
+// });
 
 // Import local files
 //
