@@ -16,7 +16,7 @@ var entry = [
 var plugins = [
   new webpack.NamedModulesPlugin(),
   new ExtractTextPlugin('css/app.css'),
-  new CopyWebpackPlugin([{ from: './web/static/assets', to: '.' }]),
+  new CopyWebpackPlugin([{ from: './web/static/assets', to: './' }]),
 ];
 
 // if (env === 'dev') {

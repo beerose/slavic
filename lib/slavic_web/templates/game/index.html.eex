@@ -1,13 +1,18 @@
-<div id="root">Root.</div>
+<div id="game"></div>
+<div id="currentPlayer"></div>
 
-<div id="login">
+<div id="userPanel">
     <h4>Use your email to join the game</h4>
-    Email: <input id="email" type="email" required>
-    <button id="joinButton">Join</button>
-    <button id="leftButton">Leave shrine</button>
+    <div id="login" style="display: block;">
+        Email: <input id="email" type="email" required>
+        <button id="joinButton" style="display: inline;">Join</button>
+    </div>
+    <button id="leftButton" style="display: none;">Leave shrine</button>
     <br/><br/>
-    <h4>Messages</h4>
-    <div id="messages" class="messages"></div>
+    <div id="players">
+        <h4 id="active_players" style="display: none;">Active players:</h4>
+        <div id="messages" class="messages"></div>
+    </div>
 </div>
 
 <div id = "socket"> </div>

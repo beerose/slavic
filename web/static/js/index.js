@@ -3,47 +3,59 @@
 // config.paths.watched in "brunch-config.js".
 //
 import 'phoenix_html';
-// import Phaser from 'phaser-ce';
-// 
-// var game = new Phaser.Game();
-// 
-console.log('Hello.');
-console.log('KK.');
+import * as pixi from 'pixi.js';
+pixi.settings.SCALE_MODE = pixi.SCALE_MODES.NEAREST;
+import Tink from 'vendor/tink';
 
+import socket from './socket';
+import 'login';
+import { joinChannel } from './common/channels';
 
-import { connectToSocket, leftTheSocket } from './socket';
+const app = new pixi.Application();
+const tink = new Tink(pixi, app.view);
 
-// handler for the join button
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('joinButton').addEventListener('click', () => {
-    var email = document.getElementById('email').value;
-    // if (/@/.test(email)) {
-    console.log(email);
-    connectToSocket(email.trim(), document);
-    // } else {
-    //  alert('You should enter your email to join the game');
-    // }
-  });
-});
+document.querySelector('#game').appendChild(app.view);
 
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('leftButton').addEventListener('click', () => {
-    var email = document.getElementById('email').value;
-    leftTheSocket(email, document);
-  });
-});
-
-// Import local files
 //
-// socket.connect();
-// const channel = socket.channel('shrine', {});
-// joinChannel(channel, () => {
-//  console.log('Joined channel.');
-// });
 
+function preload() {
+
+}
+
+function create() {
+  pixi.loader
+    .add('sword', 'images/sword.png')
+    .load(function(loader, resources) {
+      var sword = new pixi.Sprite(resources.sword.texture);
+      sword.scale.x = 4;
+      sword.scale.y = 4;
+      // Setup the position of the bunny
+      sword.x = app.renderer.width / 2;
+      sword.y = app.renderer.height / 2;
+
+      sword.anchor.x = 0.5;
+      sword.anchor.y = 0.5;
+
+      app.stage.addChild(sword);
+
+      app.ticker.add(function() {
+        sword.rotation += 0.01;
+      });
+
+      tink.makeDraggable(sword);
+    });
+
+  // socket.connect();
+  // const channel = socket.channel('shrine', {});
+  // joinChannel(channel, () => {
+  //  console.log('Joined channel.');
+  // });
+}
 
 function update() {
-
+  tink.update();
+  requestAnimationFrame(update);
+  console.log('..');
 }
 
 function render() {
@@ -54,3 +66,6 @@ function shutdown() {
 
 }
 
+preload();
+create();
+update();
