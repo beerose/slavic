@@ -10,6 +10,8 @@ import Tink from 'vendor/tink';
 import socket from './socket';
 import 'login';
 import { joinChannel } from './common/channels';
+import { sheet, spawnDraggableSword } from './common/sprites';
+import { spawnHero } from './common/players';
 
 const app = new pixi.Application();
 const tink = new Tink(pixi, app.view);
@@ -19,43 +21,28 @@ document.querySelector('#game').appendChild(app.view);
 //
 
 function preload() {
-
+  sheet.load();
 }
 
 function create() {
-  pixi.loader
-    .add('sword', 'images/sword.png')
-    .load(function(loader, resources) {
-      var sword = new pixi.Sprite(resources.sword.texture);
-      sword.scale.x = 4;
-      sword.scale.y = 4;
-      // Setup the position of the bunny
-      sword.x = app.renderer.width / 2;
-      sword.y = app.renderer.height / 2;
-
-      sword.anchor.x = 0.5;
-      sword.anchor.y = 0.5;
-
-      app.stage.addChild(sword);
-
-      app.ticker.add(function() {
-        sword.rotation += 0.01;
-      });
-
-      tink.makeDraggable(sword);
-    });
-
-  // socket.connect();
-  // const channel = socket.channel('shrine', {});
-  // joinChannel(channel, () => {
-  //  console.log('Joined channel.');
-  // });
+  for (let i = 0; i < 32; ++i) {
+    spawnHero(app, tink, i, ((i / 6)|0) * 48 + 32, (i % 6) * 48 + 32);
+  }
 }
 
+
+let time = performance.now();
+
 function update() {
-  tink.update();
+  const now = performance.now();
+  const dt = now - time;
+  time = now;
+
   requestAnimationFrame(update);
-  console.log('..');
+  tink.update();
+
+
+  // console.log(dt);
 }
 
 function render() {
