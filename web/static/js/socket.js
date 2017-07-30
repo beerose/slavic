@@ -1,8 +1,10 @@
 import { Socket } from 'phoenix';
-import { updatePlayersList, initNewPlayer, handlePlayerLeft } from './login';
+// import { updatePlayersList, initNewPlayer, handlePlayerLeft } from './login';
 import * as chat from './chat';
+import * as login from './login/index';
 
 let players = {};
+let channel;
 // Start the connection to the socket and joins the channel
 // Does initialization and key binding
 
@@ -43,11 +45,11 @@ function connectToSocket(player, document) {
   // on joining channel, we receive the current players list
     .receive('ok', initialPlayers => {
       players = initialPlayers.players;
-      initNewPlayer(players, currentPlayer);
-      console.log('Joined to channel');
+      login.initNewPlayer(players, currentPlayer);
       addChannelListeners(channel, document);
       setupChannelMessageHandlers(channel);
     });
+  return channel;
 }
 
 
@@ -55,12 +57,12 @@ function setupChannelMessageHandlers(channel) {
   // New player joined the game
   channel.on('player:joined', ({ player: player }) => {
     players[player.id] = player;
-    updatePlayersList(players);
+    login.updatePlayersList(players);
   });
   // Player left the game
   channel.on('player:left', ({ player: players_updated }) => {
-    updatePlayersList(players_updated);
-    handlePlayerLeft();
+    login.updatePlayersList(players_updated);
+    login.handlePlayerLeft();
   });
 
   channel.on('player:send_message', (

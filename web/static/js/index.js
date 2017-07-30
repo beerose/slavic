@@ -10,7 +10,7 @@ import Tink from 'vendor/tink';
 import charm from 'vendor/charm';
 
 import socket from './socket';
-import 'login';
+// import 'login';
 import { joinChannel } from './common/channels';
 import { sheet, spawnDraggableSword } from './common/sprites';
 import { spawnHero } from './common/players';
