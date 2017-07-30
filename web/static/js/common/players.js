@@ -7,7 +7,9 @@ export function spawnHero(
   app, tink, heroKind = 0,
   x = undefined,
   y = undefined,
-  { parent, interactive }) {
+  { parent, interactive, name },
+  callback
+) {
   const hero = new pixi.Sprite(
     sheet.characters[heroKind]
   );
@@ -28,6 +30,12 @@ export function spawnHero(
   } else {
     app.stage.addChild(hero);
   }
+
+  if (name) {
+    hero.addChild(heroText(name));
+  }
+
+  if (callback) callback(hero);
 }
 
 function makeInteractive(sprite, tink, onClickCallback) {
@@ -52,7 +60,8 @@ function makeInteractive(sprite, tink, onClickCallback) {
     if (!sprite) return;
 
     disabled = false;
-    if (!pointer.hitTestSprite(sprite)
+    if (sprite.transform && sprite.position
+        && !pointer.hitTestSprite(sprite)
         && sprite.scale.x !== originalScaleX) {
       resetChange();
     } else {
@@ -86,3 +95,23 @@ function makeInteractive(sprite, tink, onClickCallback) {
   };
 }
 
+function heroText(str) {
+  const style = new pixi.TextStyle({
+    fontSize: 12,
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+    fill: ['#ffffff', '#ff9900'], // gradient
+    fillGradientStops: [0.4, 1],
+    stroke: '#4a1850',
+    strokeThickness: 2,
+    wordWrap: true,
+    wordWrapWidth: 440,
+  });
+
+  const text = new pixi.Text(str, style);
+  text.scale.x = 0.5;
+  text.scale.y = 0.5;
+  text.y += 8;
+  text.x -= text.width / 2 - 1;
+  return text;
+}
