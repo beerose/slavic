@@ -90,7 +90,7 @@ function makeInteractive(sprite, tink, onClickCallback) {
   sprite.release = () => {
 
   };
-  sprite.press = () => {
+  sprite.tap = () => {
     onClickCallback(sprite);
   };
 }

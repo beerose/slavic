@@ -31,7 +31,7 @@ function connectToSocket(player, document) {
   // connects to the socket endpoint
   const socket = new Socket('/socket', { params: { player_id: player } });
   socket.connect();
-  const channel = socket.channel('lobby:init', {});
+  channel = socket.channel('lobby:init', {});
   var currentPlayer = player;
 
   // joins the channel

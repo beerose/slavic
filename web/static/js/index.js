@@ -4,6 +4,7 @@
 //
 import 'phoenix_html';
 import * as pixi from 'pixi.js';
+import * as Matter from 'matter-js';
 pixi.settings.SCALE_MODE = pixi.SCALE_MODES.NEAREST;
 
 import Tink from 'vendor/tink';
@@ -46,8 +47,21 @@ function updateCanvasSize() {
   app.stage.scale.set(scaleFactor);
 }
 
+let engine;
+let mrender;
 
 function preload() {
+  engine = Matter.Engine.create();
+  mrender = Matter.Render.create({
+    element: app.view,
+    engine: engine,
+  });
+  var ground = Matter.Bodies.rectangle(10, 10, 50, 50, { isStatic: true });
+  Matter.World.add(engine.world, [ground]);
+  Matter.Engine.run(engine);
+  Matter.Render.run(mrender);
+  console.log(ground);
+
   pointer.init(tink);
 
   updateCanvasSize();
@@ -81,6 +95,8 @@ function update() {
   tink.update();
   charm.update();
 
+  playerState.hero.x += playerState.hero.vx;
+  playerState.hero.y += playerState.hero.vy;
 
   // console.log(dt);
 }
@@ -103,6 +119,18 @@ function enterShrine(heroKind) {
     { parent: room, name: playerState.name },
     player => {
       playerState.hero = player;
+
+      // player.body = Matter.Bodies.rectangle(
+      //  player.position.x,
+      //  player.position.y,
+      //  player.width,
+      //  player.height
+      // );
+
+
+      player.vx = 0;
+      player.vy = 0;
+      tink.arrowControl(player, 3);
       console.log(playerState);
     });
 }
