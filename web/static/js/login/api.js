@@ -4,7 +4,7 @@ import { helloNewPlayer,
 
 import { connectToSocket } from '../socket';
 
-let userCreated = false;
+let userCreated = null;
 
 export function initNewPlayer(players, currentPlayer) {
   helloNewPlayer(currentPlayer);
@@ -13,8 +13,10 @@ export function initNewPlayer(players, currentPlayer) {
 
 export function executeLogin() {
   var username = document.getElementById('username').value;
-  userCreated = true;
-  connectToSocket(username.trim(), document);
+  userCreated = username.trim();
+  if (userCreated) {
+    connectToSocket(username.trim(), document);
+  }
 }
 
 export function handlePlayerLeft() {
