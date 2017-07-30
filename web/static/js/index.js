@@ -97,11 +97,12 @@ function enterShrine(heroKind) {
   console.log('Enter shrine.');
   const room = new pixi.Container();
   app.stage.addChild(room);
-  const player = spawnHero(
+  spawnHero(
     app, tink, heroKind,
     logicalSize.x / 2 - 16, logicalSize.y / 2 - 16,
-    { parent: room, name: playerState.name }, px => {
-      playerState.hero = px;
+    { parent: room, name: playerState.name },
+    player => {
+      playerState.hero = player;
       console.log(playerState);
     });
 }
