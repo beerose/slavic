@@ -62,8 +62,8 @@ defmodule SlavicWeb.GameChannel do
   def handle_in("player:hero_init", %{"playerState" => playerState }, socket) do
     player_id = socket.assigns.player_id
     player = player_id |> GameState.get_player
-    Map.put(player, :playerState, playerState)
-    |> GameState.update_player(player)
+    |> Map.put( :playerState, playerState)
+    |> GameState.update_player()
 
     broadcast! socket, "player:init_heroes", %{player: GameState.players()}
     IO.inspect(GameState.players())
