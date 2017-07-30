@@ -4,9 +4,7 @@ import { helloNewPlayer,
 
 import { connectToSocket } from '../socket';
 
-
-var userCreated = false;
-
+let userCreated = false;
 
 export function initNewPlayer(players, currentPlayer) {
   helloNewPlayer(currentPlayer);
@@ -15,6 +13,7 @@ export function initNewPlayer(players, currentPlayer) {
 
 export function executeLogin() {
   var username = document.getElementById('username').value;
+  userCreated = true;
   connectToSocket(username.trim(), document);
 }
 
@@ -32,7 +31,6 @@ document.addEventListener('keyup', function(event) {
       && (event.keyCode === 13)) {
     event.preventDefault();
     executeLogin();
-    userCreated = true;
   }
   // case 37: 
   // case 38:
