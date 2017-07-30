@@ -21,6 +21,9 @@ import pointer from './common/pointer';
 const app = new pixi.Application();
 const tink = new Tink(pixi, app.view);
 
+export const playerState = {};
+// playerState.hero.kind
+
 document.querySelector('#game').appendChild(app.view);
 
 let resources;
@@ -98,6 +101,8 @@ function enterShrine(heroKind) {
     app, tink, heroKind,
     logicalSize.x / 2 - 16, logicalSize.y / 2 - 16,
     { parent: room });
+
+  playerState.hero = player;
   console.log(player);
 }
 
