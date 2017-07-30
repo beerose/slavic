@@ -61,7 +61,7 @@ function preload() {
 }
 
 function create() {
-  heroSelection.show();
+  heroSelection.show(enterShrine);
 
   spawnDraggableSword(resources, app, tink);
   update();
@@ -90,14 +90,27 @@ function shutdown() {
 
 }
 
-preload();
-
+function enterShrine(heroKind) {
+  console.log('Enter shrine.');
+  const room = new pixi.Container();
+  app.stage.addChild(room);
+  const player = spawnHero(
+    app, tink, heroKind,
+    logicalSize.x / 2 - 16, logicalSize.y / 2 - 16,
+    { parent: room });
+  console.log(player);
+}
 
 var heroSelection = {
   choose(hero) {
     console.log(hero, 'clicked!');
+    if (heroSelection.callback) {
+      heroSelection.callback(hero.kind);
+    }
+    heroSelection.hide();
   },
-  show() {
+  show(callback) {
+    heroSelection.callback = callback;
     const selection = new pixi.Container();
     heroSelection.container = selection;
     const coolScreenConstant = 80;
@@ -126,3 +139,4 @@ var heroSelection = {
 
 window.addEventListener('resize', updateCanvasSize, false);
 window.addEventListener('orientationchange', updateCanvasSize, false);
+preload();
