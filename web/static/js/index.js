@@ -21,7 +21,7 @@ import pointer from './common/pointer';
 const app = new pixi.Application();
 const tink = new Tink(pixi, app.view);
 
-export const playerState = {};
+export var playerState = {};
 // playerState.hero.kind
 
 document.querySelector('#game').appendChild(app.view);
@@ -100,10 +100,10 @@ function enterShrine(heroKind) {
   const player = spawnHero(
     app, tink, heroKind,
     logicalSize.x / 2 - 16, logicalSize.y / 2 - 16,
-    { parent: room });
-
-  playerState.hero = player;
-  console.log(player);
+    { parent: room, name: playerState.name }, px => {
+      playerState.hero = px;
+      console.log(playerState);
+    });
 }
 
 var heroSelection = {
@@ -137,15 +137,15 @@ var heroSelection = {
     selection.position.y = app.view.height / coolScreenConstant;
   },
   hide() {
-    heroSelection.container.children.forEach(x => {
-      x.position.x = -1000;
-      x.position.y = -1000;
-      x.over = null;
-      x.press = null;
-      x.out = null;
-      x.enabled = false;
-      x.destroy();
-    });
+    // heroSelection.container.children.forEach(x => {
+    //  x.position.x = -1000;
+    //  x.position.y = -1000;
+    //  x.over = null;
+    //  x.press = null;
+    //  x.out = null;
+    //  x.enabled = false;
+    //  x.destroy();
+    // });
     heroSelection.container.destroy();
     tink.buttons = [];
   },
