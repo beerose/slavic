@@ -2,9 +2,9 @@ import { Socket } from 'phoenix';
 // import { updatePlayersList, initNewPlayer, handlePlayerLeft } from './login';
 import * as chat from './chat';
 import * as login from './login/index';
-
+import player from './index';
 let players = {};
-let channel;
+let channel = 'dupa';
 // Start the connection to the socket and joins the channel
 // Does initialization and key binding
 
@@ -26,6 +26,7 @@ function addChannelListeners(channel, document) {
     }
   });
 }
+
 
 function connectToSocket(player, document) {
   // connects to the socket endpoint
@@ -63,6 +64,11 @@ function setupChannelMessageHandlers(channel) {
     { player: { message: message, author: author } }) => {
     chat.updateMessageBox(message, author);
   });
+
+  channel.on('player:init_heroes', (
+    { player: players }) => {
+    console.log(players);
+  });
 }
 
-export { connectToSocket };
+export { connectToSocket, channel };

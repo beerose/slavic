@@ -9,7 +9,7 @@ pixi.settings.SCALE_MODE = pixi.SCALE_MODES.NEAREST;
 
 import Tink from 'vendor/tink';
 import charm from 'vendor/charm';
-
+import { Socket } from 'phoenix';
 import socket from './socket';
 // import 'login';
 import { joinChannel } from './common/channels';
@@ -18,12 +18,14 @@ import { spawnHero } from './common/players';
 import load from './common/loader';
 import shuffle from './common/shuffle';
 import pointer from './common/pointer';
+import { channel } from './socket';
 
 const app = new pixi.Application();
 const tink = new Tink(pixi, app.view);
 
 export var playerState = {};
 // playerState.hero.kind
+export var player;
 
 document.querySelector('#game').appendChild(app.view);
 
@@ -95,9 +97,10 @@ function update() {
   tink.update();
   charm.update();
 
-  playerState.hero.x += playerState.hero.vx;
-  playerState.hero.y += playerState.hero.vy;
-
+  if (playerState.hero) {
+    playerState.hero.x += playerState.hero.vx;
+    playerState.hero.y += playerState.hero.vy;
+  }
   // console.log(dt);
 }
 
@@ -132,6 +135,11 @@ function enterShrine(heroKind) {
       player.vy = 0;
       tink.arrowControl(player, 3);
       console.log(playerState);
+      console.log(channel, 'channel');
+      setTimeout(() => {
+        console.log(channel, 'channel');
+        channel.push('player:hero_init', { playerState: player.kind });
+      }, 1000);
     });
 }
 
