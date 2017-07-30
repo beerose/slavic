@@ -2,9 +2,10 @@ import { Socket } from 'phoenix';
 // import { updatePlayersList, initNewPlayer, handlePlayerLeft } from './login';
 import * as chat from './chat';
 import * as login from './login/index';
+import playerState from './index';
 
 let players = {};
-let channel;
+let channel = null;
 // Start the connection to the socket and joins the channel
 // Does initialization and key binding
 
@@ -25,13 +26,18 @@ function addChannelListeners(channel, document) {
       chatOpen = chat.handleNewMessaged(channel, chatOpen);
     }
   });
+  console.log(playerState);
+  if (playerState.hero) {
+    console.log('###############################');
+    channel.push('player:hero_init', { hero: playerState.hero });
+  }
 }
 
 function connectToSocket(player, document) {
   // connects to the socket endpoint
   const socket = new Socket('/socket', { params: { player_id: player } });
   socket.connect();
-  const channel = socket.channel('lobby:init', {});
+  channel = socket.channel('lobby:init', {});
   var currentPlayer = player;
 
   // joins the channel
@@ -63,6 +69,11 @@ function setupChannelMessageHandlers(channel) {
     { player: { message: message, author: author } }) => {
     chat.updateMessageBox(message, author);
   });
+
+  channel.on('player:init_heroes', (
+    { player: players }) => {
+    console.log(players);
+  });
 }
 
-export { connectToSocket };
+export { connectToSocket, channel };

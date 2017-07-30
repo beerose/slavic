@@ -17,11 +17,13 @@ import { spawnHero } from './common/players';
 import load from './common/loader';
 import shuffle from './common/shuffle';
 import pointer from './common/pointer';
+import playerChooseHero from './fetch';
+import { channel } from './socket';
 
 const app = new pixi.Application();
 const tink = new Tink(pixi, app.view);
 
-export const playerState = {};
+export var playerState = {};
 // playerState.hero.kind
 
 document.querySelector('#game').appendChild(app.view);
@@ -103,7 +105,10 @@ function enterShrine(heroKind) {
     { parent: room });
 
   playerState.hero = player;
-  console.log(player);
+
+  channel.push('player:hero_init', { playerState: playerState });
+
+  console.log('send!!!!!!!!!!!!!!!!');
 }
 
 var heroSelection = {
