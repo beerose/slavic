@@ -52,13 +52,21 @@ export function receivePlayers(received) {
 
 export function updateSprites() {
   // console.log(playerState);
+  app.stage.children.forEach(x => {
+
+  });
+
   for (const name in playerState.players) {
     if (name !== playerState.name) {
       const info = playerState.players[name];
       const sprite = info.sprite;
 
-      sprite.position.x = info.x;
-      sprite.position.y = info.y;
+      if (sprite) {
+        sprite.position.x = info.x || -100;
+        sprite.position.y = info.y || -100;
+      } else {
+        console.log('No sprite here at ', info);
+      }
     }
   }
 }
@@ -164,6 +172,10 @@ function enterShrine(heroKind) {
       player.vx = 0;
       player.vy = 0;
 
+      playerState.players[playerState.name] =
+        playerState.players[playerState.name] || {};
+      playerState.players[playerState.name].sprite = player;
+
       const shift = 32;
 
       document.addEventListener('keydown', function(event) {
@@ -188,10 +200,7 @@ function enterShrine(heroKind) {
 
       console.log(playerState);
       console.log(channel, 'channel');
-      setTimeout(() => {
-        console.log(channel, 'channel');
-        channel.push('player:hero_init', { playerState: player.kind });
-      }, 1000);
+      channel.push('player:hero_init', { kind: player.kind });
     });
 }
 
