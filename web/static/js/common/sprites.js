@@ -25,7 +25,7 @@ export const sheet = (() => {
 
   const loadCharacters = resources => {
     for (let i = 0; i < 32; ++i) {
-      console.log(i % 6, (i / 6 | 0) + 9);
+      // console.log(i % 6, (i / 6 | 0) + 9);
 
       characters[i] = newTexture(
         resources,

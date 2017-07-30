@@ -1,44 +1,8 @@
-import * as pixi from 'pixi.js';
-import { sheet } from './sprites';
 import charm from 'vendor/charm';
-import pointer from './pointer';
+import pointer from '../controls/pointer';
+import { pixi } from '../pix';
 
-export function spawnHero(
-  app, tink, heroKind = 0,
-  x = undefined,
-  y = undefined,
-  { parent, interactive, name },
-  callback
-) {
-  const hero = new pixi.Sprite(
-    sheet.characters[heroKind]
-  );
-  hero.kind = heroKind;
-  hero.scale.x = 2;
-  hero.scale.y = 2;
-  hero.x = x || app.renderer.width / 2;
-  hero.y = y || app.renderer.height / 2;
-  if (interactive && interactive[0]) {
-    makeInteractive(hero, tink, interactive[1]);
-  }
-
-  hero.anchor.x = 0.5;
-  hero.anchor.y = 0.5;
-
-  if (parent) {
-    parent.addChild(hero);
-  } else {
-    app.stage.addChild(hero);
-  }
-
-  if (name) {
-    hero.addChild(heroText(name));
-  }
-
-  if (callback) callback(hero);
-}
-
-function makeInteractive(sprite, tink, onClickCallback) {
+export function makeInteractive(sprite, tink, onClickCallback) {
   const scale = 1.4;
   const yShift = 4;
   const originalScaleX = sprite.scale.x;
@@ -95,7 +59,7 @@ function makeInteractive(sprite, tink, onClickCallback) {
   };
 }
 
-function heroText(str) {
+export function prepareLabel(str) {
   const style = new pixi.TextStyle({
     fontSize: 12,
     fontStyle: 'italic',

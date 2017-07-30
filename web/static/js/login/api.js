@@ -3,7 +3,7 @@ import { helloNewPlayer,
   changeViewAfterLogout } from './ui';
 
 import { connectToSocket } from '../socket';
-import { playerState } from '../index';
+import state from '../state';
 
 let currentUser = null;
 
@@ -16,7 +16,8 @@ export function executeLogin() {
   var username = document.getElementById('username').value;
   currentUser = username.trim();
   if (currentUser) {
-    playerState.name = currentUser;
+    console.log('statefful!', state);
+    state.player.name = currentUser;
     connectToSocket(username.trim(), document);
   }
 }

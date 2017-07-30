@@ -54,6 +54,12 @@ function setupChannelMessageHandlers(channel) {
     players[player.id] = player;
     login.updatePlayersList(players);
   });
+  channel.on('player:joined', () => {
+    console.log('dupa1');
+  });
+  channel.on('player:joined', () => {
+    console.log('dupa2');
+  });
   // Player left the game
   channel.on('player:left', ({ player: players_updated }) => {
     login.updatePlayersList(players_updated);
