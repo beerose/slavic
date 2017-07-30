@@ -24,8 +24,7 @@ const app = new pixi.Application();
 const tink = new Tink(pixi, app.view);
 
 export var playerState = {};
-// playerState.hero.kind
-export var player;
+playerState.players = {};
 
 document.querySelector('#game').appendChild(app.view);
 
@@ -34,6 +33,36 @@ const logicalSize = {
   x: 512,
   y: 256,
 };
+
+export function receivePlayers(received) {
+  const players = playerState.players;
+  for (const name in received) {
+    if (!players[name]) {
+      players[name] = {};
+    }
+    Object.assign(players[name], received[name]);
+    if (!players[name].sprite) {
+      players[name].sprite = spawnHero(
+        app, tink, players[name].kind, players[name].x || 20, players[name].y || 20,
+        { name: players[name].id }, () => {} );
+    }
+  }
+  console.log('received', players, playerState.playerState);
+}
+
+export function updateSprites() {
+  // console.log(playerState);
+  for (const name in playerState.players) {
+    if (name !== playerState.name) {
+      const info = playerState.players[name];
+      const sprite = info.sprite;
+
+      sprite.position.x = info.x;
+      sprite.position.y = info.y;
+    }
+  }
+}
+
 function updateCanvasSize() {
   let scaleFactor = Math.min(
     window.innerWidth / logicalSize.x,
@@ -101,7 +130,8 @@ function update() {
     playerState.hero.x += playerState.hero.vx;
     playerState.hero.y += playerState.hero.vy;
   }
-  // console.log(dt);
+
+  updateSprites();
 }
 
 function render() {
@@ -133,7 +163,28 @@ function enterShrine(heroKind) {
 
       player.vx = 0;
       player.vy = 0;
-      tink.arrowControl(player, 3);
+
+      const shift = 32;
+      window.addEventListener('keydown', function(event) {
+        switch (event.key) {
+        case 'ArrowDown':
+          player.position.y += shift;
+          break;
+        case 'ArrowUp':
+          player.position.y -= shift;
+          break;
+        case 'ArrowLeft':
+          player.position.x -= shift;
+          break;
+        case 'ArrowRight':
+          player.position.x += shift;
+          break;
+        default:
+          return; // Quit when this doesn't handle the key event.
+        }
+      }, false);
+
+
       console.log(playerState);
       console.log(channel, 'channel');
       setTimeout(() => {
