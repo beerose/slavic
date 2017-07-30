@@ -1,5 +1,4 @@
 <div id="game" class="-hidden"></div>
-<h4 id="enable-chat" class="hidden"> Press enter to enable chat </h4>
 <article id="chat"> 
   <ul></ul>
   <section class="hidden">

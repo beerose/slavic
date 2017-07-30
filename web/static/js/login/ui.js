@@ -10,12 +10,12 @@ const chatEnabledInfo = document.getElementById('enable-chat');
 
 export function helloNewPlayer(player) {
   currentPlayerDiv.innerHTML = '<p>Hello ' + player + '</p>';
+  setTimeout(() => currentPlayerDiv.style.display = 'none', 1800);
 }
 
 export function changeLoginView() {
   login.classList.add('hidden');
   leftButton.classList.remove('hidden');
-  chatEnabledInfo.classList.remove('hidden');
   document.querySelector('section#userPanel')
     .classList.add('hidden');
 }

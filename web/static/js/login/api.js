@@ -4,7 +4,7 @@ import { helloNewPlayer,
 
 import { connectToSocket } from '../socket';
 
-let userCreated = false;
+let currentUser = null;
 
 export function initNewPlayer(players, currentPlayer) {
   helloNewPlayer(currentPlayer);
@@ -13,8 +13,8 @@ export function initNewPlayer(players, currentPlayer) {
 
 export function executeLogin() {
   var username = document.getElementById('username').value;
-  userCreated = true;
-  connectToSocket(username.trim(), document);
+  currentUser = username.trim();
+  connectToSocket(currentUser, document);
 }
 
 export function handlePlayerLeft() {
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('keyup', function(event) {
-  if (!userCreated
+  if (!currentUser
       && (event.keyCode === 13)) {
     event.preventDefault();
     executeLogin();

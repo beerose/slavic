@@ -49,6 +49,8 @@ function makeInteractive(sprite, tink, onClickCallback) {
     disable();
   };
   function recover() {
+    if (!sprite) return;
+
     disabled = false;
     if (!pointer.hitTestSprite(sprite)
         && sprite.scale.x !== originalScaleX) {

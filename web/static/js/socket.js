@@ -15,20 +15,14 @@ function addChannelListeners(channel, document) {
   });
 
   chat.sendButton.addEventListener('click', () => {
-    console.log('cht', chat);
     chat.pushMessage(channel);
   });
 
   document.addEventListener('keyup', function(event) {
     switch (event.keyCode) {
     case 13: // [ENTER]
-      event.preventDefault(); // ???
+      event.preventDefault();
       chatOpen = chat.handleNewMessaged(channel, chatOpen);
-
-    // case 37: 
-    // case 38:
-    // case 39:
-    // case 40:
     }
   });
 }
