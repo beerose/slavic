@@ -14,7 +14,9 @@ export function initNewPlayer(players, currentPlayer) {
 export function executeLogin() {
   var username = document.getElementById('username').value;
   currentUser = username.trim();
-  connectToSocket(currentUser, document);
+  if (currentUser) {
+    connectToSocket(username.trim(), document);
+  }
 }
 
 export function handlePlayerLeft() {
