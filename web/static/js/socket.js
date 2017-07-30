@@ -2,7 +2,7 @@ import { Socket } from 'phoenix';
 // import { updatePlayersList, initNewPlayer, handlePlayerLeft } from './login';
 import * as chat from './chat';
 import * as login from './login/index';
-import { handlePlayers } from './index';
+import { receivePlayers } from './index';
 let players = {};
 let channel = 'dupa';
 // Start the connection to the socket and joins the channel
@@ -67,7 +67,7 @@ function setupChannelMessageHandlers(channel) {
 
   channel.on('player:init_heroes', (
     { player: players }) => {
-    handlePlayers(players);
+    receivePlayers(players);
   });
 }
 

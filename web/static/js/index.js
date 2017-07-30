@@ -165,7 +165,8 @@ function enterShrine(heroKind) {
       player.vy = 0;
 
       const shift = 32;
-      window.addEventListener('keydown', function(event) {
+
+      document.addEventListener('keydown', function(event) {
         switch (event.key) {
         case 'ArrowDown':
           player.position.y += shift;
