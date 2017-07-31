@@ -12,6 +12,8 @@ import state from './state';
 window.state = state;
 import * as sync from './sync';
 
+import playerController from './players/controller';
+
 import { setupListeners } from './listeners';
 import {
   pixi, load,
@@ -21,6 +23,8 @@ import {
 } from './pix';
 
 document.querySelector('#game').appendChild(app.view);
+
+let resources;
 
 state.playersContainer = new pixi.Container();
 app.stage.addChild(state.playersContainer);
@@ -44,14 +48,12 @@ export function receivePlayers(received) {
 
 export function destroyInvalidHeroes() {
   for (const sprite of state.playersContainer.children) {
-    console.log(sprite, ' <AEFA>');
-    if (sprite.kind) {
-      const playerFullInfo = state.players[sprite.name];
-      if (!playerFullInfo || !playerFullInfo.sprite) {
-        state.playersContainer.removeChild(sprite);
-        delete state.players[sprite.name];
-        sprite.destroy();
-      }
+    const playerFullInfo = state.players[sprite.name];
+    if (!playerFullInfo || !playerFullInfo.sprite) {
+      console.log('destt', playerFullInfo);
+      state.playersContainer.removeChild(sprite);
+      delete state.players[sprite.name];
+      sprite.destroy();
     }
   }
 }
@@ -155,7 +157,7 @@ function enterShrine(heroKind) {
     { parent: room, name: name },
     player => {
       state.hero = player;
-
+      playerController.possess(player);
       // player.body = Matter.Bodies.rectangle(
       //  player.position.x,
       //  player.position.y,
