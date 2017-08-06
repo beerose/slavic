@@ -1,12 +1,16 @@
 defmodule SlavicWeb.GameChannel do
   use Phoenix.Channel
-
+  use GenServer
   alias Slavic.GameState
+  alias Slavic.GameStateGenserver
 
   def join("lobby:init", message, socket) do
     players = GameState.players()
-    send(self(), {:after_join, message})
+    
+    with {:ok, pid} <- GameStateGenserver.start_link(:init_game)
+      do send pid, :start_game end
 
+    send(self(), {:after_join, message})
     {:ok, %{players: players}, socket}
   end
 
@@ -31,8 +35,7 @@ defmodule SlavicWeb.GameChannel do
 
   def handle_info({:after_join, _message}, socket) do
     player_id = socket.assigns.player_id
-    player = %{id: player_id}
-    IO.inspect("################################")
+    player = %{id: player_id, join_time: System.system_time(:second)}
     IO.inspect(player)
     player = GameState.put_player(player)
     # TO DO
@@ -43,8 +46,6 @@ defmodule SlavicWeb.GameChannel do
   def handle_in("player:left", %{ }, socket) do
    # IO.inspect(player <> "arrived")
     player_id = socket.assigns.player_id
-    IO.inspect("######################################y##########")
-    IO.inspect("################################################")
 
     GameState.delete_player(player_id)
     broadcast! socket, "player:left", %{player: GameState.players()}
@@ -59,7 +60,7 @@ defmodule SlavicWeb.GameChannel do
     {:noreply, socket}
   end
 
-  def handle_in("player:hero_init", %{"kind" => kind }, socket) do
+  def handle_in("player:hero_init", %{"playerState" => kind }, socket) do
     player_id = socket.assigns.player_id
     player = player_id |> GameState.get_player
     |> Map.put( :kind, kind)

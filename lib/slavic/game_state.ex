@@ -41,9 +41,6 @@ defmodule Slavic.GameState do
     end
 
     def delete_player(player_id) do
-      IO.inspect("######################################")
-      IO.inspect("######################################")
-
       Agent.update(__MODULE__, &Map.delete(&1, player_id))
     end
 
@@ -51,7 +48,8 @@ defmodule Slavic.GameState do
       Update the player information in the map
     """
     def update_player(player) do
-      Agent.update(__MODULE__, &Map.put(&1, player.id, player))
+      player_updated = player |> Map.put(:last_action, System.system_time(:second))
+      Agent.update(__MODULE__, &Map.put(&1, player.id, player_updated))
       player
     end
 
